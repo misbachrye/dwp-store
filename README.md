@@ -4,7 +4,7 @@ Aplikasi web sederhana untuk manajemen pelanggan dan transaksi penjualan paket d
 
 ## ⏱️ Estimasi Waktu Pengerjaan
 
-Proyek ini diselesaikan dalam waktu kurang lebih **8-10 Jam di hari sabtu dan minggu**.
+Proyek ini diselesaikan dalam waktu kurang lebih **8-10 jam pada hari Sabtu dan Minggu.**
 
 ## 🌟 Tampilan Aplikasi (Screenshots)
 
