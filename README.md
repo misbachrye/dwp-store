@@ -52,45 +52,6 @@ Berikut adalah antarmuka utama dari aplikasi ini:
 
 ---
 
-## 🌟 Fitur Utama
-
-Aplikasi ini mencakup beberapa fungsionalitas utama:
-
-1.  **Autentikasi Pengguna**:
-    * Halaman login sederhana untuk staff/admin.
-    * Proteksi rute (Private Routes) menggunakan React Context.
-2.  **Manajemen Pelanggan (CRUD)**:
-    * Menampilkan daftar pelanggan dalam tabel.
-    * Menambah pelanggan baru dengan validasi input real-time.
-    * Mengedit data pelanggan yang sudah ada.
-    * Menghapus data pelanggan dengan dialog konfirmasi.
-3.  **Transaksi Pembelian**:
-    * Modal khusus untuk memilih paket data bagi pelanggan tertentu.
-    * Integrasi data produk dari database.
-    * Konfirmasi pembelian sebelum eksekusi.
-4.  **Riwayat Transaksi**:
-    * Mencatat dan menampilkan log histori pembelian yang telah berhasil dilakukan.
-5.  **UI/UX Modern**:
-    * Menggunakan **Material UI (MUI)** untuk tampilan yang responsif dan konsisten.
-    * Feedback pengguna menggunakan Snackbar (notifikasi sukses/gagal).
-
-## 🛠️ Teknologi yang Digunakan
-
-* **Core**: [React](https://react.dev/) (v19), [Vite](https://vitejs.dev/)
-* **UI Framework**: [Material UI (MUI)](https://mui.com/) v7
-* **Routing**: [React Router DOM](https://reactrouter.com/) v7
-* **HTTP Client**: [Axios](https://axios-http.com/)
-* **Backend Simulation**: [JSON Server](https://github.com/typicode/json-server)
-* **State Management**: React Context API & Custom Hooks
-* **Utilities**: UUID (untuk generate ID)
-
-## 📋 Prasyarat
-
-Sebelum memulai, pastikan komputer Anda telah terinstal:
-
-* [Node.js](https://nodejs.org/) (Versi 18 atau lebih baru disarankan)
-* NPM (Node Package Manager)
-
 ## 🚀 Instalasi dan Cara Menjalankan
 
 Project ini membutuhkan dua proses terminal yang berjalan secara paralel (satu untuk Backend, satu untuk Frontend).
@@ -126,6 +87,53 @@ Gunakan kredensial berikut untuk masuk ke dalam aplikasi:
 Username : admin
 Password : password123
 ```
+
+---
+
+## 🌟 Fitur Utama
+
+Aplikasi ini mencakup beberapa fungsionalitas utama:
+
+1.  **Autentikasi Pengguna**:
+    * Halaman login sederhana untuk staff/admin.
+    * Proteksi rute (Private Routes) menggunakan React Context.
+2.  **Manajemen Pelanggan (CRUD)**:
+    * Menampilkan daftar pelanggan dalam tabel.
+    * Menambah pelanggan baru dengan validasi input real-time.
+    * Mengedit data pelanggan yang sudah ada.
+    * Menghapus data pelanggan dengan dialog konfirmasi.
+3.  **Transaksi Pembelian**:
+    * Modal khusus untuk memilih paket data bagi pelanggan tertentu.
+    * Integrasi data produk dari database.
+    * Konfirmasi pembelian sebelum eksekusi.
+4.  **Riwayat Transaksi**:
+    * Mencatat dan menampilkan log histori pembelian yang telah berhasil dilakukan.
+5.  **UI/UX Modern**:
+    * Menggunakan **Material UI (MUI)** untuk tampilan yang responsif dan konsisten.
+    * Feedback pengguna menggunakan Snackbar (notifikasi sukses/gagal).
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+* **Core**: [React](https://react.dev/) (v19), [Vite](https://vitejs.dev/)
+* **UI Framework**: [Material UI (MUI)](https://mui.com/) v7
+* **Routing**: [React Router DOM](https://reactrouter.com/) v7
+* **HTTP Client**: [Axios](https://axios-http.com/)
+* **Backend Simulation**: [JSON Server](https://github.com/typicode/json-server)
+* **State Management**: React Context API & Custom Hooks
+* **Utilities**: UUID (untuk generate ID)
+
+---
+
+## 📋 Prasyarat
+
+Sebelum memulai, pastikan komputer Anda telah terinstal:
+
+* [Node.js](https://nodejs.org/) (Versi 18 atau lebih baru disarankan)
+* NPM (Node Package Manager)
+
+---
 
 ## Struktur Project
 ```
