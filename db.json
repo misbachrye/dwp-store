@@ -1,0 +1,88 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "password123",
+      "name": "Super Admin"
+    }
+  ],
+  "customers": [
+    {
+      "id": "01881c8a-4c52-490c-86b0-3957a985077b",
+      "name": "Ahmad Misbach",
+      "phone": "0815477779981",
+      "email": "misbachrye@mgail.co.id"
+    }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "name": "Freedom Internet 10GB",
+      "description": "30 Hari, All Network",
+      "price": 50000
+    },
+    {
+      "id": "p2",
+      "name": "Unlimited Youtube",
+      "description": "7 Hari, FUP 1GB/hari",
+      "price": 25000
+    },
+    {
+      "id": "p3",
+      "name": "Sultan quota 50GB",
+      "description": "30 Hari, + Disney Hotstar",
+      "price": 120000
+    }
+  ],
+  "transactions": [
+    {
+      "id": "d594e63f-ddc9-4f54-8c70-1ae32fb26717",
+      "customerId": null,
+      "customerName": "Budi Santoso",
+      "productName": "Freedom Internet 10GB",
+      "price": 50000,
+      "date": "11/29/2025, 5:59:02 PM"
+    },
+    {
+      "id": "6b4465f3-59aa-467f-854c-348c1aa1509c",
+      "customerId": null,
+      "customerName": "Siti Aminah",
+      "productName": "Unlimited Youtube",
+      "price": 25000,
+      "date": "11/29/2025, 8:06:23 PM"
+    },
+    {
+      "id": "998a1d49-d496-4a85-8cee-ac9106c202f2",
+      "customerId": null,
+      "customerName": "Ahmad Misbach",
+      "productName": "Unlimited Youtube",
+      "price": 25000,
+      "date": "11/29/2025, 9:31:03 PM"
+    },
+    {
+      "id": "e2471c6e-eff5-4a87-9dfc-e6d248545804",
+      "customerId": "01881c8a-4c52-490c-86b0-3957a985077b",
+      "customerName": "Ahmad Misbach",
+      "productName": "Sultan quota 50GB",
+      "price": 120000,
+      "date": "11/29/2025, 9:31:33 PM"
+    },
+    {
+      "id": "429f84c5-92c1-4e6e-9d1f-99a8ac6bc6fb",
+      "customerId": "01881c8a-4c52-490c-86b0-3957a985077b",
+      "customerName": "Ahmad Misbach",
+      "productName": "Unlimited Youtube",
+      "price": 25000,
+      "date": "11/29/2025, 9:36:27 PM"
+    },
+    {
+      "id": "1432641f-9416-434c-a02c-a3fbad908127",
+      "customerId": "01881c8a-4c52-490c-86b0-3957a985077b",
+      "customerName": "Ahmad Misbach",
+      "productName": "Sultan quota 50GB",
+      "price": 120000,
+      "date": "11/30/2025, 11:11:01 AM"
+    }
+  ]
+}
