@@ -15,7 +15,7 @@ Berikut adalah antarmuka utama dari aplikasi ini:
 ![Halaman Login](./screenshots/halaman-login.png)
 
 ### 2. Dashboard / Manajemen Customer
-*Menampilkan daftar pelanggan, fitur pencarian, dan tombol aksi.*
+*Menampilkan daftar pelanggan dan tombol aksi.*
 ![Dashboard Customer](./screenshots/dashboard-customer.png)
 
 ### 3. Tambah Customer
