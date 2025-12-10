@@ -5,8 +5,6 @@ export const useTransactions = () => {
   const [trxs, setTrxs] = useState([]);
   const [searchText, setSearchText] = useState("");
   
-  // PERBAIKAN: Set initial state menjadi true
-  // Agar tidak perlu memanggil setLoading(true) di dalam useEffect
   const [loading, setLoading] = useState(true); 
 
   // State Filter
@@ -17,11 +15,10 @@ export const useTransactions = () => {
 
   // 1. Fetch Data
   useEffect(() => {
-    // PERBAIKAN: Hapus setLoading(true) dari sini
     api.get("/transactions")
       .then((res) => setTrxs(res.data))
       .catch((err) => console.error("Gagal ambil transaksi:", err))
-      .finally(() => setLoading(false)); // setLoading(false) tetap ada untuk mengakhiri loading
+      .finally(() => setLoading(false));
   }, []);
 
   // 2. Daftar Paket Unik

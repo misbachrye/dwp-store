@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 export const useCustomers = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [actionLoading, setActionLoading] = useState(false); // State baru untuk loading aksi simpan/hapus
+  const [actionLoading, setActionLoading] = useState(false);
   const [searchText, setSearchText] = useState("");
   
   // State Dialog & Form
@@ -96,7 +96,7 @@ export const useCustomers = () => {
 
   const handleSave = async () => {
     if (!validateAll()) return false;
-    setActionLoading(true); // Mulai loading simpan
+    setActionLoading(true);
     try {
       if (isEditMode) {
         await api.put(`/customers/${formData.id}`, formData);
@@ -112,12 +112,12 @@ export const useCustomers = () => {
       showSnackbar('Gagal menyimpan data', error);
       return false;
     } finally {
-      setActionLoading(false); // Selesai loading simpan
+      setActionLoading(false);
     }
   };
 
   const handleDelete = async () => {
-    setActionLoading(true); // Mulai loading hapus
+    setActionLoading(true);
     try {
       await api.delete(`/customers/${deleteTargetId}`);
       showSnackbar('Customer berhasil dihapus');
@@ -126,7 +126,7 @@ export const useCustomers = () => {
     } catch (error) {
       showSnackbar('Gagal menghapus data', error);
     } finally {
-      setActionLoading(false); // Selesai loading hapus
+      setActionLoading(false);
     }
   };
 
@@ -143,7 +143,7 @@ export const useCustomers = () => {
 
   return {
     // Data
-    filteredCustomers, loading, actionLoading, // Return actionLoading
+    filteredCustomers, loading, actionLoading,
     // Search
     searchText, setSearchText,
     // Add/Edit Form
