@@ -1,6 +1,6 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Stack, TextField, InputAdornment, Button, Typography, Box, Popover, FormControl, InputLabel, Select, MenuItem, Grid, Divider, IconButton, Tooltip } from "@mui/material";
+import { Stack, TextField, InputAdornment, Button, Typography, Box, Popover, FormControl, InputLabel, Select, MenuItem, Grid, Divider, IconButton, Tooltip, LinearProgress } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CloseIcon from "@mui/icons-material/Close";
@@ -17,6 +17,7 @@ const TransactionHistory = () => {
   const {
     filteredTrxs, uniquePackages,
     searchText, setSearchText,
+    loading, // Ambil state loading
     anchorEl, openFilter, handleFilterClick, handleFilterClose,
     dateFilter, setDateFilter,
     packageFilter, setPackageFilter,
@@ -122,7 +123,16 @@ const TransactionHistory = () => {
         </Stack>
       </Popover>
 
-      <DataGrid rows={filteredTrxs} columns={columns} disableRowSelectionOnClick pageSize={10} initialState={{ pagination: { paginationModel: { pageSize: 10 } } }} pageSizeOptions={[10, 25, 50]} />
+      <DataGrid 
+        rows={filteredTrxs} 
+        columns={columns} 
+        disableRowSelectionOnClick 
+        pageSize={10} 
+        initialState={{ pagination: { paginationModel: { pageSize: 10 } } }} 
+        pageSizeOptions={[10, 25, 50]} 
+        loading={loading} // Menampilkan loading di DataGrid
+        slots={{ loadingOverlay: LinearProgress }}
+      />
     </div>
   );
 };

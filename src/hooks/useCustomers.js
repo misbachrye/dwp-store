@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 export const useCustomers = () => {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [actionLoading, setActionLoading] = useState(false); // State baru untuk loading aksi simpan/hapus
   const [searchText, setSearchText] = useState("");
   
   // State Dialog & Form
@@ -27,7 +28,7 @@ export const useCustomers = () => {
   };
   const closeSnackbar = () => setSnackbar(prev => ({ ...prev, open: false }));
 
-  // --- 2. Logic Filtering di sini ---
+  // --- Logic Filtering ---
   const filteredCustomers = useMemo(() => {
     return customers.filter((customer) => {
       const lowerText = searchText.toLowerCase();
@@ -95,6 +96,7 @@ export const useCustomers = () => {
 
   const handleSave = async () => {
     if (!validateAll()) return false;
+    setActionLoading(true); // Mulai loading simpan
     try {
       if (isEditMode) {
         await api.put(`/customers/${formData.id}`, formData);
@@ -109,10 +111,13 @@ export const useCustomers = () => {
     } catch (error) {
       showSnackbar('Gagal menyimpan data', error);
       return false;
+    } finally {
+      setActionLoading(false); // Selesai loading simpan
     }
   };
 
   const handleDelete = async () => {
+    setActionLoading(true); // Mulai loading hapus
     try {
       await api.delete(`/customers/${deleteTargetId}`);
       showSnackbar('Customer berhasil dihapus');
@@ -120,6 +125,8 @@ export const useCustomers = () => {
       fetchCustomers();
     } catch (error) {
       showSnackbar('Gagal menghapus data', error);
+    } finally {
+      setActionLoading(false); // Selesai loading hapus
     }
   };
 
@@ -136,7 +143,7 @@ export const useCustomers = () => {
 
   return {
     // Data
-    filteredCustomers, loading,
+    filteredCustomers, loading, actionLoading, // Return actionLoading
     // Search
     searchText, setSearchText,
     // Add/Edit Form

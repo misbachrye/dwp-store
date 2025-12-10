@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Paper, Typography, Box, Alert, IconButton, InputAdornment, Container } from '@mui/material';
+import { TextField, Button, Paper, Typography, Box, Alert, IconButton, InputAdornment, Container, CircularProgress } from '@mui/material';
 import { Visibility, VisibilityOff, LockOutlined } from '@mui/icons-material';
 import api from '../api/axiosInstance';
 import { useAuth } from '../context/AuthContext';
@@ -9,12 +9,16 @@ const LoginPage = () => {
   const [input, setInput] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // State loading baru
   
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true); // Mulai loading
+
     try {
       const res = await api.get(`/users?username=${input.username}&password=${input.password}`);
       if (res.data.length > 0) {
@@ -26,6 +30,8 @@ const LoginPage = () => {
     } catch (err) {
       console.error("Login Error:", err); 
       setError('Terjadi kesalahan server');
+    } finally {
+      setLoading(false); // Selesai loading
     }
   };
 
@@ -47,7 +53,7 @@ const LoginPage = () => {
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'center',
-          bgcolor: 'rgba(255, 255, 255, 0.95)' // Sedikit transparan
+          bgcolor: 'rgba(255, 255, 255, 0.95)'
         }}>
           <Box sx={{ 
             m: 1, 
@@ -72,10 +78,12 @@ const LoginPage = () => {
           <Box component="form" onSubmit={handleLogin} sx={{ mt: 1, width: '100%' }}>
             <TextField 
               fullWidth label="Username" margin="normal" variant="outlined"
+              disabled={loading} // Disable input saat loading
               value={input.username} onChange={(e) => setInput({...input, username: e.target.value})} 
             />
             <TextField 
               fullWidth label="Password" type={showPassword ? 'text' : 'password'} margin="normal"
+              disabled={loading} // Disable input saat loading
               value={input.password} onChange={(e) => setInput({...input, password: e.target.value})}
               InputProps={{
                 endAdornment: (
@@ -89,9 +97,10 @@ const LoginPage = () => {
             />
             <Button 
               fullWidth variant="contained" type="submit" size="large"
-              sx={{ mt: 3, mb: 2, py: 1.5, borderRadius: 2, fontWeight: 'bold', fontSize: '1rem' }}
+              disabled={loading} // Disable tombol saat loading
+              sx={{ mt: 3, mb: 2, py: 1.5, borderRadius: 2, fontWeight: 'bold', fontSize: '1rem', height: 50 }}
             >
-              Masuk Aplikasi
+              {loading ? <CircularProgress size={24} color="inherit" /> : "Masuk Aplikasi"}
             </Button>
           </Box>
         </Paper>

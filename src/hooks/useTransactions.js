@@ -4,6 +4,10 @@ import api from "../api/axiosInstance";
 export const useTransactions = () => {
   const [trxs, setTrxs] = useState([]);
   const [searchText, setSearchText] = useState("");
+  
+  // PERBAIKAN: Set initial state menjadi true
+  // Agar tidak perlu memanggil setLoading(true) di dalam useEffect
+  const [loading, setLoading] = useState(true); 
 
   // State Filter
   const [anchorEl, setAnchorEl] = useState(null);
@@ -13,9 +17,11 @@ export const useTransactions = () => {
 
   // 1. Fetch Data
   useEffect(() => {
+    // PERBAIKAN: Hapus setLoading(true) dari sini
     api.get("/transactions")
       .then((res) => setTrxs(res.data))
-      .catch((err) => console.error("Gagal ambil transaksi:", err));
+      .catch((err) => console.error("Gagal ambil transaksi:", err))
+      .finally(() => setLoading(false)); // setLoading(false) tetap ada untuk mengakhiri loading
   }, []);
 
   // 2. Daftar Paket Unik
@@ -98,19 +104,16 @@ export const useTransactions = () => {
     document.body.removeChild(link);
   };
 
-  // Export General (Semua data yang tampil di tabel)
+  // Export General
   const handleExportGeneral = () => {
     downloadCSV(filteredTrxs, `Laporan_Transaksi_${new Date().toISOString().split('T')[0]}.csv`);
   };
 
-  // Export Single (Hanya satu baris yang dipilih)
+  // Export Single
   const handleExportSingle = (trx) => {
     const singleData = [trx]; 
-    
-    // Nama file lebih spesifik: Invoice_[NamaCustomer]_[ID].csv
     const safeName = trx.customerName.replace(/[^a-zA-Z0-9]/g, '_');
     const filename = `Invoice_${safeName}_${trx.id.substring(0, 8)}.csv`;
-    
     downloadCSV(singleData, filename);
   };
 
@@ -126,6 +129,7 @@ export const useTransactions = () => {
   return {
     trxs, filteredTrxs, uniquePackages,
     searchText, setSearchText,
+    loading, 
     anchorEl, openFilter: Boolean(anchorEl), handleFilterClick, handleFilterClose,
     dateFilter, setDateFilter,
     packageFilter, setPackageFilter,
