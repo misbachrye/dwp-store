@@ -1,10 +1,15 @@
 # DWP Data Store Application
 
-Aplikasi web sederhana untuk manajemen pelanggan dan transaksi penjualan paket data. Project ini dibangun menggunakan React (Vite) sebagai frontend dan JSON-Server sebagai simulasi backend REST API.
+Aplikasi web modern untuk manajemen pelanggan dan transaksi penjualan paket data. Project ini dibangun menggunakan **React (Vite)** sebagai frontend yang di-deploy di **Vercel**, dan **JSON-Server** sebagai backend REST API yang di-hosting di **Railway**.
 
 ## ⏱️ Estimasi Waktu Pengerjaan
 
 Proyek ini diselesaikan dalam waktu kurang lebih **8-10 jam pada hari Sabtu, 29 November 2025 dan Minggu, 30 November 2025.**
+
+## 🚀 Live Demo
+
+* **Frontend (App):** [https://dwp-store.vercel.app/](https://dwp-store.vercel.app/)
+* **Backend (API):** [https://dwp-store-production.up.railway.app/](https://dwp-store-production.up.railway.app/)
 
 ## 🌟 Tampilan Aplikasi (Screenshots)
 
@@ -70,6 +75,13 @@ npm install
 ```
 
 ### 2. Jalankan Backend (JSON Server)
+Konfigurasi Frontend ke Lokal
+Ubah file src/api/axiosInstance.js
+```
+// Comment bagian URL Railway, gunakan localhost
+baseURL: 'http://localhost:3001',
+```
+
 Buka terminal pertama, lalu jalankan perintah berikut untuk mengaktifkan mock API pada port 3001:
 ```bash
 npm run server
@@ -114,15 +126,40 @@ Aplikasi ini mencakup beberapa fungsionalitas utama:
 
 ---
 
+## 🌟 Fitur & Pembaruan Terbaru
+
+Aplikasi ini telah dikembangkan dengan fokus pada *User Experience (UX)* dan ketahanan sistem:
+
+### 1. 🛡️ Robust Connection Handling (Auto-Retry)
+* **Masalah:** Server backend (Railway) membutuhkan waktu 5-30 detik untuk "bangun" dari mode sleep (Cold Start).
+* **Solusi:** Implementasi *Axios Interceptor* kustom yang otomatis melakukan request ulang (retry) jika server belum siap.
+* **UX:** Menampilkan notifikasi realtime (Snackbar) kepada user: *"Server sedang mencoba menghubungkan... (1/3)"* agar user mengetahui sistem sedang bekerja, bukan error.
+
+### 2. 🚦 Enhanced Feedback System
+* **Loading States:** Indikator visual (Spinner/Linear Progress) saat Login, mengambil data transaksi, dan menyimpan data customer.
+* **Validasi Real-time:** Form input customer memvalidasi format Email dan No HP secara langsung.
+* **404 Not Found Page:** Halaman khusus yang ramah pengguna jika mengakses URL yang tidak valid.
+
+### 3. 📱 Fitur Inti (CRUD & Transaksi)
+* **Manajemen Customer:** Tambah, Edit, dan Hapus (Soft Delete/Hard Delete simulation) dengan konfirmasi keamanan.
+* **Transaksi Pembelian:** Modal interaktif untuk memilih paket data berdasarkan Customer ID.
+* **Riwayat Transaksi:** Pencatatan log transaksi lengkap dengan fitur Filter (Tanggal, Harga, Nama) dan Export CSV.
+
+---
+
 ## 🛠️ Teknologi yang Digunakan
 
-* **Core**: [React](https://react.dev/) (v19), [Vite](https://vitejs.dev/)
-* **UI Framework**: [Material UI (MUI)](https://mui.com/) v7
-* **Routing**: [React Router DOM](https://reactrouter.com/) v7
-* **HTTP Client**: [Axios](https://axios-http.com/)
-* **Backend Simulation**: [JSON Server](https://github.com/typicode/json-server)
-* **State Management**: React Context API & Custom Hooks
-* **Utilities**: UUID (untuk generate ID)
+### Frontend (Vercel)
+* **Core:** [React v19](https://react.dev/) + [Vite](https://vitejs.dev/)
+* **UI Framework:** [Material UI (MUI) v7](https://mui.com/)
+* **Routing:** React Router DOM v7
+* **Data Fetching:** Axios (Custom Instance with Interceptors)
+* **State Management:** React Context API (Auth)
+
+### Backend (Railway)
+* **Core:** JSON Server (Node.js)
+* **Database:** `db.json`
+* **Deployment:** Railway Web Service
 
 ---
 
@@ -137,30 +174,28 @@ Sebelum memulai, pastikan komputer Anda telah terinstal:
 
 ## Struktur Project
 ```
-dwp-test/
-├── db.json                  # Database simulasi (Users, Customers, Products, Transactions)
-├── screenshots/             # Folder untuk menyimpan gambar dokumentasi
-│   ├── halaman-login.png
-│   ├── dashboard-customer.png
-│   └── ...
+dwp-store/
+├── db.json                  # Database simulasi (Customers, Products, Transactions)
 ├── src/
 │   ├── api/
-│   │   └── axiosInstance.js # Konfigurasi Axios Base URL
+│   │   └── axiosInstance.js # Config Axios dengan Auto-Retry Logic
 │   ├── components/
-│   │   ├── ConfirmDialog.jsx # Komponen dialog konfirmasi reusable
-│   │   ├── Layout.jsx        # Template utama (Navbar & Container)
-│   │   └── TableSkeleton.jsx # Loading state untuk tabel
+│   │   ├── ConfirmDialog.jsx # Modal Konfirmasi Reusable
+│   │   ├── Layout.jsx        # Navbar & Layout Utama
+│   │   └── TableSkeleton.jsx # Loading Skeleton UI
 │   ├── context/
-│   │   └── AuthContext.jsx   # Context untuk global state login/logout
+│   │   └── AuthContext.jsx   # Global State Auth
 │   ├── hooks/
-│   │   └── useCustomers.js   # Custom hook logic CRUD Customer
+│   │   ├── useCustomers.js   # Logic CRUD Customer
+│   │   └── useTransactions.js # Logic & Filter Transaksi
 │   ├── pages/
-│   │   ├── CustomerPage.jsx       # Halaman utama manajemen customer
-│   │   ├── LoginPage.jsx          # Halaman login
-│   │   ├── TransactionHistory.jsx # Halaman riwayat transaksi
-│   │   └── TransactionModal.jsx   # Modal pembelian paket
-│   ├── App.jsx              # Main routing configuration
-│   └── main.jsx             # Entry point React
-├── package.json
-└── vite.config.js
+│   │   ├── CustomerPage.jsx       # Halaman Utama
+│   │   ├── LoginPage.jsx          # Halaman Login
+│   │   ├── TransactionHistory.jsx # Riwayat & Export CSV
+│   │   ├── TransactionModal.jsx   # Proses Pembelian
+│   │   └── NotFoundPage.jsx       # Halaman 404 Custom
+│   ├── App.jsx              # Routing & Global Notification
+│   └── main.jsx
+├── vercel.json              # Konfigurasi Rewrite URL Vercel (SPA)
+└── package.json
 ```
